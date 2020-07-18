@@ -1,0 +1,41 @@
+//------------------------------------------------
+//--- 010 Editor v10.0 Binary Template
+//
+//      File: SAR.bt
+//   Authors: Kalico
+//   Version: 1.0
+// File Mask: *.sar
+//  ID Bytes: 73 61 72 04 || 73 61 72 84
+//------------------------------------------------
+
+struct Header {
+    char magic[3] <fgcolor=cDkRed>;
+    ubyte compression <fgcolor=cWhite>;
+    uint authorID <fgcolor=cLtRed>;
+    ubyte layers <fgcolor=cRed>;
+    ubyte sizeHeight <fgcolor=cPurple>;
+    ubyte sizeWidth <fgcolor=cYellow>;
+    ubyte soundEffect <fgcolor=cLtBlue>;
+};
+
+struct Pos {
+    ubyte x <fgcolor=cLtGreen>;
+    ubyte y <fgcolor=cDkGreen>;
+};
+
+struct Layer {
+    Pos topLeft;
+    Pos botLeft;
+    Pos topRight;
+    Pos botRight;
+    ushort color <fgcolor=cLtBlue>;
+    ushort symbol <fgcolor=cDkBlue>;
+    uint unk <fgcolor=cBlack>;
+};
+
+struct Payload {
+    Header header;
+    Layer layer[header.layers];
+};
+
+Payload payload;
