@@ -9,8 +9,8 @@
 //------------------------------------------------
 
 struct Header {
-    char magic[3] <fgcolor=cDkRed>;
-    ubyte compression <fgcolor=cWhite>;
+    char magic[3]; Assert(magic == "sar");
+    ubyte compression; Assert(compression == 0x04 || 0x84);
     uint authorID <fgcolor=cLtRed>;
     ubyte layers <fgcolor=cRed>;
     ubyte sizeHeight <fgcolor=cPurple>;
@@ -30,12 +30,13 @@ struct Layer {
     Pos botRight;
     ushort color <fgcolor=cLtBlue>;
     ushort symbol <fgcolor=cDkBlue>;
-    uint unk <fgcolor=cBlack>;
+    ushort unk1 <fgcolor=cBlack>;
+    ushort unk2 <fgcolor=cBlack>;
 };
 
-struct Payload {
+struct SAR {
     Header header;
     Layer layer[header.layers];
 };
 
-Payload payload;
+SAR sar;
